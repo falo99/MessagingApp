@@ -3,6 +3,8 @@
 
 <p>list of messages</p>
 
+<a asp-controller="Message" asp-action="Create" class="btn btn-primary">Create Message</a>
+
 <table>
     <thead>
         <tr>
@@ -27,6 +29,11 @@
                 </td>
                 <td>
                 @message.Content
+                </td>
+                <td>
+                   <form asp-controller="Message" asp-action="Delete" asp-route-id="@message.Id" method="post">
+                      <input type="submit" name="delete" value="Delete Message" />
+                    </form>
                 </td>
             </tr>
         }
