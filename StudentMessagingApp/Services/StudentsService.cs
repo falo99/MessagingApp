@@ -43,14 +43,12 @@ namespace StudentMessagingApp.Services
             
 
         public async Task UpdateAsync(string id, Students updatedStudent) =>
-            await _studentsCollection.ReplaceOneAsync(x => x.Id == id, updatedStudent);
+            await _studentsCollection.ReplaceOneAsync(x => x.Id == updatedStudent.Id, updatedStudent);
 
-        public async Task UpdateAsyncMessages(string id,  Students updatedStudent)
+        public async Task UpdateAsyncMessages(string id, Students updatedStudent)
         {
             await _studentsCollection.ReplaceOneAsync(x => x.Id == id, updatedStudent);
         }
-          
-
         public async Task RemoveAsync(string id) =>
             await _studentsCollection.DeleteOneAsync(x => x.Id == id);
 

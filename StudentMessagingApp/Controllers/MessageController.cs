@@ -79,9 +79,10 @@ namespace StudentMessagingApi.Controllers
                 return NotFound();
             }
 
-            await _studentsService.UpdateAsyncMessages(message.StudentId, student);
+            
             await _messagesService.RemoveAsync(id, student);
-     
+            await _studentsService.UpdateAsync(message.StudentId, student);
+
 
             return RedirectToAction("Index", "Message");
         }
