@@ -1,0 +1,45 @@
+﻿@model IEnumerable<StudentMessagingApp.Models.Message>
+@{
+    ViewData["Title"] = "Messages";
+}
+<h1>@ViewData["Title"]</h1>
+
+<a asp-controller="Message" asp-action="Create" class="btn btn-primary">Create Message</a>
+
+<p>list of messages</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>StudentId</th>
+            <th>Title</th>
+            <th>Content</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var message in Model)
+        {
+            <tr>
+                <td>
+                @message.Id
+                </td>
+                <td>
+                @message.StudentId
+                </td>
+                <td>
+                @message.Title
+                </td>
+                <td>
+                @message.Content
+                </td>
+                <td>
+                <a class="btn btn-primary" asp-controller="Message" asp-action="Details" asp-route-id="@message.Id">Message Info</a>
+                </td>
+                <td>
+                <a class="btn btn-primary" asp-controller="Message" asp-action="DetailsStudent" asp-route-id="@message.Id">Student's Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

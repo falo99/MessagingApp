@@ -1,0 +1,29 @@
+﻿@model StudentMessagingApp.Models.Students
+
+    <table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Surname</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr>
+                <td>
+                @Model.Id
+                </td>
+                <td>
+                @Model.Name
+                </td>
+                <td>
+                @Model.Surname
+                </td>
+                <td>
+                   <form asp-controller="Students" asp-action="Delete" asp-route-id="@Model.Id" method="post">
+                      <input type="submit" name="delete" value="Delete Student" />
+                    </form>
+                </td>
+            </tr>
+    </tbody>
+</table>
