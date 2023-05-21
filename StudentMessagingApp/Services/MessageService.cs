@@ -44,6 +44,11 @@ namespace StudentMessagingApp.Services
             await _messagesCollection.DeleteOneAsync(x => x.Id == id);
             
         }
-           
+        public async Task RemoveAsyncStudentMessages(string id)
+        {
+            await _messagesCollection.DeleteManyAsync(x => x.StudentId == id);
+        }
+
+
     }
 }

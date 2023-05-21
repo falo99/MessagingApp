@@ -87,12 +87,18 @@ namespace StudentMessagingApp.Controllers
         public async Task<IActionResult> Delete(string id)
         {
             var student = await _studentsService.GetAsync(id);
+            var messageId = student.Messages;
+            
 
             if (student is null)
             {
                 return NotFound();
             }
+            
+   
 
+
+            await _messageService.RemoveAsyncStudentMessages(id);
             await _studentsService.RemoveAsync(id);
 
             return RedirectToAction("Index", "Students");
