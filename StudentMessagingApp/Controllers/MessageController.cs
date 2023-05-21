@@ -5,8 +5,6 @@ using StudentMessagingApp.Services;
 
 namespace StudentMessagingApi.Controllers
 {
-   //[ApiController]
-   // [Route("api/[controller]")]
     public class MessageController : Controller
     {
         private readonly MessageService _messagesService;
@@ -59,6 +57,21 @@ namespace StudentMessagingApi.Controllers
         public async Task<IActionResult> Create(Message newMesssage)
         {
             await _messagesService.CreateAsync(newMesssage);
+            var student = await _studentsService.GetAsync(newMesssage.StudentId);
+            int i = 0;
+            if (student.Messages is null)
+            {
+                student.Messages[0] = newMesssage.Id;
+            }
+            else
+            {
+                foreach (var messages in student.Messages)
+                {
+                    student.Messages[i++] = newMesssage.Id;
+                }
+            }
+            
+            await _studentsService.UpdateAsyncMessages(newMesssage.StudentId, student.Messages, student);
            
            return RedirectToAction("Index", "Message");
         }

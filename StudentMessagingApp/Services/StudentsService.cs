@@ -37,12 +37,16 @@ namespace StudentMessagingApp.Services
 
         public async Task CreateAsync(Students newStudent)
         {
+            newStudent.Messages = new Guid[0];
             await _studentsCollection.InsertOneAsync(newStudent);
         }
             
 
         public async Task UpdateAsync(string id, Students updatedStudent) =>
             await _studentsCollection.ReplaceOneAsync(x => x.Id == id, updatedStudent);
+
+        public async Task UpdateAsyncMessages(string id, Guid[] messages, Students updatedStudent) =>
+          await _studentsCollection.ReplaceOneAsync(x => x.Id == id && x.Messages == messages, updatedStudent);
 
         public async Task RemoveAsync(string id) =>
             await _studentsCollection.DeleteOneAsync(x => x.Id == id);

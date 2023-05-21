@@ -4,8 +4,7 @@ using StudentMessagingApp.Services;
 
 namespace StudentMessagingApp.Controllers
 {
-    //[ApiController]
-    //[Route("controller")]
+
     public class StudentsController : Controller
     {
         private readonly StudentsService _studentsService;
@@ -85,7 +84,6 @@ namespace StudentMessagingApp.Controllers
         }
 
 
-        //[HttpDelete("{id:length(24)}")]
         public async Task<IActionResult> Delete(string id)
         {
             var student = await _studentsService.GetAsync(id);
@@ -99,25 +97,6 @@ namespace StudentMessagingApp.Controllers
 
             return RedirectToAction("Index", "Students");
         }
-
-
-        //[HttpGet]
-        //public async Task<List<Students>> Get() =>
-        //    await _studentsService.GetAsync();
-
-        //[HttpGet("{id:length(24)}")]
-        //public async Task<ActionResult<Students>> Get(string id)
-        //{
-        //    var student = await _studentsService.GetAsync(id);
-
-        //    if (student is null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return student;
-        //}
-
 
 
         //}
@@ -147,14 +126,7 @@ namespace StudentMessagingApp.Controllers
 
         //}
 
-        //[HttpPost]
-        //public async Task<IActionResult> Post(Students newStudent)
-        //{
-        //    await _studentsService.CreateAsync(newStudent);
-
-        //    return CreatedAtAction(nameof(Get), new { id = newStudent.Id }, newStudent);
-        //}
-
+        
         //[HttpPut("{id:length(24)}")]
         //public async Task<IActionResult> Update(string id, Students updatedStudent)
         //{
