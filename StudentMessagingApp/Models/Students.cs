@@ -22,7 +22,7 @@ namespace StudentMessagingApp.Models
         [BsonElement("Messages")]
         [JsonPropertyName("Messages")]
         [BsonRepresentation(BsonType.String)]
-        public Guid[] Messages { get; set; } = null!;
+        public List<Guid> Messages { get; set; } = null!;
 
     }
 }

@@ -7,6 +7,7 @@ namespace StudentMessagingApp.Services
     public class MessageService
     {
         private readonly IMongoCollection<Message> _messagesCollection;
+        private readonly IMongoCollection<Students> _studentCollection;
 
         public MessageService(
             IOptions<DbSettings> collectionsDbSettings)
@@ -37,7 +38,12 @@ namespace StudentMessagingApp.Services
         public async Task UpdateAsync(Guid id, Message updatedMessage) =>
             await _messagesCollection.ReplaceOneAsync(x => x.Id == id, updatedMessage);
 
-        public async Task RemoveAsync(Guid id) =>
+        public async Task RemoveAsync(Guid id, Students updatedStudent)
+        {
+            updatedStudent.Messages.Remove(id);
             await _messagesCollection.DeleteOneAsync(x => x.Id == id);
+            
+        }
+           
     }
 }

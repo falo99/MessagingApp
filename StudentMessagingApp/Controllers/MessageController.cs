@@ -58,20 +58,12 @@ namespace StudentMessagingApi.Controllers
         {
             await _messagesService.CreateAsync(newMesssage);
             var student = await _studentsService.GetAsync(newMesssage.StudentId);
-            int i = 0;
-            if (student.Messages is null)
-            {
-                student.Messages[0] = newMesssage.Id;
-            }
-            else
-            {
-                foreach (var messages in student.Messages)
-                {
-                    student.Messages[i++] = newMesssage.Id;
-                }
-            }
+
+           
+            student.Messages.Add(newMesssage.Id);
             
-            await _studentsService.UpdateAsyncMessages(newMesssage.StudentId, student.Messages, student);
+            
+            await _studentsService.UpdateAsyncMessages(newMesssage.StudentId, student);
            
            return RedirectToAction("Index", "Message");
         }
@@ -80,13 +72,16 @@ namespace StudentMessagingApi.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             var message = await _messagesService.GetAsync(id);
+            var student = await _studentsService.GetAsync(message.StudentId);
 
             if (message is null)
             {
                 return NotFound();
             }
 
-            await _messagesService.RemoveAsync(id);
+            await _studentsService.UpdateAsyncMessages(message.StudentId, student);
+            await _messagesService.RemoveAsync(id, student);
+     
 
             return RedirectToAction("Index", "Message");
         }
