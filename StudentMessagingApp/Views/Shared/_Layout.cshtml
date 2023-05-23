@@ -31,9 +31,10 @@
                          <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Message" asp-action="Index">Messages</a>
                         </li>
-                        @*<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Message" asp-action="Create">Create New Message</a>
-                        </li>*@
+                        <form class="d-flex" method="get" action="@Url.Action("Search", "Message")">
+                         <input class="form-control me-2" type="search" placeholder="Search Student's Messages'" aria-label="Search" name="search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
                     </ul>
                 </div>
             </div>

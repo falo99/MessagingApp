@@ -1,0 +1,40 @@
+﻿@model IEnumerable<StudentMessagingApp.Models.Message>
+
+
+<p>list of messages</p>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>StudentId</th>
+            <th>Title</th>
+            <th>Content</th>
+        </tr>
+    </thead>
+   <tbody>
+        @foreach (var message in Model)
+        {
+            <tr>
+                <td>
+                @message.Id
+                </td>
+                <td>
+                @message.StudentId
+                </td>
+                <td>
+                @message.Title
+                </td>
+                <td>
+                @message.Content
+                </td>
+                <td>
+                   <form asp-controller="Message" asp-action="Delete" asp-route-id="@message.Id" method="post">
+                      <input type="submit" name="delete" value="Delete Message" />
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

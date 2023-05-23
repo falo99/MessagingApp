@@ -68,6 +68,35 @@ namespace StudentMessagingApi.Controllers
            return RedirectToAction("Index", "Message");
         }
 
+        public async Task<IActionResult> Search(string search)
+        {
+            var splittedString = search.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            var name = "";
+            var surname = "";
+            
+
+            if (splittedString.Length >= 2)
+            {
+                name = splittedString[0];
+                surname = splittedString[1];
+
+                name = char.ToUpper(name[0]) + name.Substring(1);
+                surname = char.ToUpper(surname[0]) + surname.Substring(1);
+
+                var student = await _studentsService.GetAsyncByNameAndSurname(name, surname);
+                var messages = await _messagesService.GetAsyncbyStudentId(student.Id);
+                return View(messages);
+            }
+            else
+            {
+                return null;
+            }
+
+            
+
+          
+        }
+
 
         public async Task<IActionResult> Delete(Guid id)
         {

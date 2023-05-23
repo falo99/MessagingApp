@@ -33,7 +33,8 @@ namespace StudentMessagingApp.Services
             await _studentsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
         public async Task<Students?> GetAsyncByNameAndSurname(string name, string surname) =>
-            await _studentsCollection.Find(x => x.Name == name && x.Surname == surname).FirstOrDefaultAsync();
+           await _studentsCollection.Find(x => x.Name == name && x.Surname == surname).FirstOrDefaultAsync();
+
 
         public async Task CreateAsync(Students newStudent)
         {
